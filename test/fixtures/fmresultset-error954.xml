@@ -1,0 +1,9 @@
+<?xml version ="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE fmresultset PUBLIC "-//FMI//DTD fmresultset//EN" "https://karbon.geistinteractive.com/fmi/xml/fmresultset.dtd">
+<fmresultset xmlns="http://www.filemaker.com/xml/fmresultset" version="1.0">
+    <error code="954"></error>
+    <product build="4/7/2016" name="FileMaker Web Publishing Engine" version="15.0.1.137"></product>
+    <datasource database="" date-format="" layout="" table="" time-format="" timestamp-format="" total-count="0"></datasource>
+    <metadata></metadata>
+    <resultset count="0" fetch-size="0"></resultset>
+</fmresultset>

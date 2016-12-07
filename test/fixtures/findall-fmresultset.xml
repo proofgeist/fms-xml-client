@@ -1,0 +1,118 @@
+<?xml version ="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE fmresultset PUBLIC "-//FMI//DTD fmresultset//EN" "https://karbon.geistinteractive.com/fmi/xml/fmresultset.dtd">
+<fmresultset xmlns="http://www.filemaker.com/xml/fmresultset" version="1.0">
+    <error code="0"></error>
+    <product build="4/7/2016" name="FileMaker Web Publishing Engine" version="15.0.1.137"></product>
+    <datasource database="Test" date-format="MM/dd/yyyy" layout="People" table="People" time-format="HH:mm:ss" timestamp-format="MM/dd/yyyy HH:mm:ss" total-count="6"></datasource>
+    <metadata>
+        <field-definition auto-enter="yes" four-digit-year="no" global="no" max-repeat="1" name="id" not-empty="no" numeric-only="no" result="text" time-of-day="no" type="normal"></field-definition>
+        <field-definition auto-enter="no" four-digit-year="no" global="no" max-repeat="1" name="name" not-empty="no" numeric-only="no" result="text" time-of-day="no" type="normal"></field-definition>
+        <field-definition auto-enter="no" four-digit-year="no" global="no" max-repeat="1" name="age" not-empty="no" numeric-only="no" result="number" time-of-day="no" type="normal"></field-definition>
+        <field-definition auto-enter="no" four-digit-year="no" global="no" max-repeat="1" name="created" not-empty="no" numeric-only="no" result="text" time-of-day="no" type="normal"></field-definition>
+        <field-definition auto-enter="no" four-digit-year="no" global="no" max-repeat="1" name="time" not-empty="no" numeric-only="no" result="number" time-of-day="no" type="normal"></field-definition>
+    </metadata>
+    <resultset count="6" fetch-size="6">
+        <record mod-id="1" record-id="6374">
+            <field name="id">
+                <data>6331</data>
+            </field>
+            <field name="name">
+                <data>Dave</data>
+            </field>
+            <field name="age">
+                <data>2</data>
+            </field>
+            <field name="created">
+                <data>true</data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+        <record mod-id="1" record-id="6375">
+            <field name="id">
+                <data>6332</data>
+            </field>
+            <field name="name">
+                <data>David</data>
+            </field>
+            <field name="age">
+                <data>2</data>
+            </field>
+            <field name="created">
+                <data>true</data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+        <record mod-id="0" record-id="6378">
+            <field name="id">
+                <data>6335</data>
+            </field>
+            <field name="name">
+                <data>Bill</data>
+            </field>
+            <field name="age">
+                <data>40</data>
+            </field>
+            <field name="created">
+                <data></data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+        <record mod-id="0" record-id="6380">
+            <field name="id">
+                <data>6337</data>
+            </field>
+            <field name="name">
+                <data>Gerald</data>
+            </field>
+            <field name="age">
+                <data>18</data>
+            </field>
+            <field name="created">
+                <data></data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+        <record mod-id="0" record-id="6381">
+            <field name="id">
+                <data>6338</data>
+            </field>
+            <field name="name">
+                <data>Herald</data>
+            </field>
+            <field name="age">
+                <data>18</data>
+            </field>
+            <field name="created">
+                <data></data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+        <record mod-id="0" record-id="6382">
+            <field name="id">
+                <data>6339</data>
+            </field>
+            <field name="name">
+                <data>joe</data>
+            </field>
+            <field name="age">
+                <data></data>
+            </field>
+            <field name="created">
+                <data></data>
+            </field>
+            <field name="time">
+                <data></data>
+            </field>
+        </record>
+    </resultset>
+</fmresultset>

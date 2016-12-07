@@ -1,0 +1,28 @@
+{
+  "name": "fm-fetch",
+  "version": "0.0.1",
+  "description": "FileMaker JS Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geistinteractive/fm-fetch.git"
+  },
+  "keywords": [
+    "filemaker"
+  ],
+  "author": "Todd Geist <todd@geistinteractive.com> (http://www.geisintertactive.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geistinteractive/fm-fetch/issues"
+  },
+  "homepage": "https://github.com/geistinteractive/fm-fetch#readme",
+  "dependencies": {
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}

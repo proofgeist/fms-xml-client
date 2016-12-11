@@ -1,7 +1,7 @@
 {
   "name": "fm-fetch",
   "version": "0.0.1",
-  "description": "FileMaker JS Client",
+  "description": "FileMaker Server XML Gateway JS Client",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -16,9 +16,9 @@
   "author": "Todd Geist <todd@geistinteractive.com> (http://www.geisintertactive.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/geistinteractive/fm-fetch/issues"
+    "url": "https://github.com/geistinteractive/fms-xml-client/issues"
   },
-  "homepage": "https://github.com/geistinteractive/fm-fetch#readme",
+  "homepage": "https://github.com/geistinteractive/fms-xml-client#readme",
   "dependencies": {
     "xml2js": "^0.4.17"
   },

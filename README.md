@@ -1,3 +1,5 @@
-# fms-json-api
+# fms-xml-client
 
-Wraps the XML gateway with a JSON based API
+A FileMaker Server XML gateway for node.js.
+
+becuase of CORS issues with FileMaker server this is only useful in node.

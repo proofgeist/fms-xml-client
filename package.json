@@ -4,7 +4,7 @@
   "description": "FileMaker Server XML Gateway JS Client",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "node test/run.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/geistinteractive/fms-xml-client#readme",
   "dependencies": {
+    "bluebird": "^3.4.6",
+    "dotenv": "^2.0.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {

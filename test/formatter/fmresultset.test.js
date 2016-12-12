@@ -5,13 +5,13 @@
 
 const assert = require('assert')
 
-const fmresultset = require('../src/fmresultset');
+const fmresultset = require('../../src/fmresultset');
 const fs = require('fs');
 
 
 describe('fmresultset converter', function(){
   describe( 'when given the dbnames query result' , function() {
-    const xml = fs.readFileSync(__dirname + '/fixtures/fmresultset-dbnames.xml')
+    const xml = fs.readFileSync(__dirname + '/../fixtures/fmresultset-dbnames.xml')
 
     const convertToJSON = fmresultset(xml)
 
@@ -31,7 +31,7 @@ describe('fmresultset converter', function(){
   })
 
   describe( 'when given a findall xml' , function() {
-    const xml = fs.readFileSync(__dirname + '/fixtures/fmresultset-findall.xml');
+    const xml = fs.readFileSync(__dirname + '/../fixtures/fmresultset-findall.xml');
     const convertToJSON = fmresultset(xml)
     it('should get records' , function( ) {
       return convertToJSON
@@ -52,7 +52,7 @@ describe('fmresultset converter', function(){
   })
 
   describe( 'when given a 954 error' , function() {
-    const xml = fs.readFileSync(__dirname + '/fixtures/fmresultset-error954.xml');
+    const xml = fs.readFileSync(__dirname + '/../fixtures/fmresultset-error954.xml');
     const convertToJSON = fmresultset(xml)
 
     it('should return error 954' , function( ) {

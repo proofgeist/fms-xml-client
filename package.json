@@ -4,7 +4,11 @@
   "description": "FileMaker Server XML Gateway JS Client",
   "main": "index.js",
   "scripts": {
-    "test": "node test/run.js"
+    "test": "node test/run.js",
+    "publish": "git push origin && git push origin --tags",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "repository": {
     "type": "git",

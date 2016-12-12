@@ -1,6 +1,6 @@
 {
-  "name": "fm-fetch",
-  "version": "1.0.0",
+  "name": "fms-xml-client",
+  "version": "0.0.1",
   "description": "FileMaker Server XML Gateway JS Client",
   "main": "index.js",
   "scripts": {

@@ -53,4 +53,25 @@ describe( 'findall' , function() {
       })
   })
 
+
+});
+
+describe( 'bad url' , function() {
+
+  it('should not throw an error', function () {
+    const options = {
+      server: 'yuck.com',
+      auth,
+      command: {
+        '-db': 'Test',
+        '-findall': true,
+        '-lays': 'people'
+      }
+    };
+    return client(options)
+      .catch(err=>{
+        assert(err.name==='RequestError')
+        return console.log()
+      })
+  })
 });

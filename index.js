@@ -23,8 +23,5 @@ module.exports = (options) => {
     .then(response=>{
       return fmresultset(response.body)
     })
-    .catch(err=>{
-      console.log(err)
-    })
 
 };

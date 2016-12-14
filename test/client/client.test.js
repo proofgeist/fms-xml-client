@@ -26,7 +26,7 @@ describe( 'dbnames' , function() {
     };
     return client(options)
       .then(json=>{
-        assert(json.errorCode === 0, 'errorCode = 0')
+        assert(json.error.code === 0, 'error.code = 0')
         return json
       })
   })
@@ -48,7 +48,7 @@ describe( 'findall' , function() {
     };
     return client(options)
       .then(json=>{
-        assert(json.errorCode === 0, 'errorCode = 0')
+        assert(json.error.code === 0, 'error.Code = 0')
         return json
       })
   })

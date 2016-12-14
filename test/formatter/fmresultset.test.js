@@ -18,7 +18,7 @@ describe('fmresultset converter', function(){
     it('should get errorCode === 0', function(){
       return convertToJSON
         .then((json)=>{
-          return assert(json.errorCode === 0, 'errorcode is 0')
+          return assert(json.error.code === 0, 'errorcode is 0')
         })
     })
 
@@ -59,7 +59,7 @@ describe('fmresultset converter', function(){
 
       return convertToJSON
         .then(json=>{
-          return assert(json.errorCode===954, "errorCode should be 954")
+          return assert(json.error.code===954, "errorCode should be 954")
         })
 
     })

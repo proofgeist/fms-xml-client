@@ -2,6 +2,7 @@
  * Created by toddgeist on 3/31/15.
  */
 module.exports = exports = FileMakerServerError;
+module.exports.errorMessage = getMessge;
 
 /**
  * FileMaker Error - based on https://coderwall.com/p/m3-cqw

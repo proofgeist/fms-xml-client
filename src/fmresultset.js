@@ -5,6 +5,7 @@
 
 
 const parseString = require('./parseString');
+const errorMessage = require('./FileMakerServerError').errorMessage
 
 
 
@@ -67,12 +68,14 @@ const formatJSON= (json)=>{
   const product = json.fmresultset.product[0].$;
   const datasource = json.fmresultset.datasource[0].$;
   const errorCode = parseInt(json.fmresultset.error[0].$.code);
+  const errorMesg = errorMessage(errorCode);
 
   const result = {
-    errorCode,
+    error : {code: errorCode, message : errorMesg},
     product,
     datasource
   };
+
 
   if(errorCode !== 0){
     return result

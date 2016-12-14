@@ -56,7 +56,7 @@ describe( 'findall' , function() {
 
 });
 
-describe.only( 'bad url' , function() {
+describe( 'bad url' , function() {
 
   it('should not throw an error', function () {
     const options = {

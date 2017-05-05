@@ -3,6 +3,9 @@
 A Promise based FileMaker Server XML gateway client for node.js.
 note! Becuase of CORS issues with FileMaker server this is only useful in node. It will not work in the browser.
 
+## 2.x Verson Breaking Change
+recid and modid are now returned in the same format that get sent it ie `-recid` and `-modid`
+
 ## Goals
 
 Make it easy to make request to FileMaker Server's xml gateway. We may add some convenience function in the future, but right now you just construct an options object with the following properties and pass it to the client.

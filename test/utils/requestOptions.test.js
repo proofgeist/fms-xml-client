@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const requestOptions = require("../../src/utils").requestOptions;
+const requestOptions = require("../../src/fms-request/utils").requestOptions;
 
 const server = "https://";
 const auth = {

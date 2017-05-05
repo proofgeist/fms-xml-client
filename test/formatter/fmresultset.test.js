@@ -5,7 +5,7 @@
 
 const assert = require("assert");
 
-const fmresultset = require("../../src/fmresultset");
+const fmresultset = require("../../src/fms-request/fmresultset");
 const fs = require("fs");
 
 describe("fmresultset converter", function() {

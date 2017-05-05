@@ -47,8 +47,8 @@ const normalizeRecords = (json) => {
   if(resultSet.$.count >= 1) {
     return resultSet.record.map(record => {
       const recObj = {};
-      recObj['modId'] = record.$['mod-id'];
-      recObj['recId'] = record.$['record-id'];
+      recObj['-modid'] = record.$['mod-id'];
+      recObj['-recid'] = record.$['record-id'];
       const arrayOfFieldData = record.field
       arrayOfFieldData.map(field=>{
         recObj[field.$.name] = field.data[0]

@@ -3,12 +3,17 @@
 A Promise based FileMaker Server XML gateway client for node.js.
 note! Becuase of CORS issues with FileMaker server this is only useful in node. It will not work in the browser.
 
-## 2.x Verson Breaking Change
+### 2.x Verson Breaking Change
 recid and modid are now returned in the same format that get sent it ie `-recid` and `-modid`
+
+### 2.1 added expiremental createClient function
+new Function that will create client with some built in methods, like save, upsert, find, delete etc. Pass in the same options as when making the raw request (see below)
+
+`const createClient = require('fms-xml-client').createClient`
 
 ## Goals
 
-Make it easy to make request to FileMaker Server's xml gateway. We may add some convenience function in the future, but right now you just construct an options object with the following properties and pass it to the client.
+Make it easy to make request to FileMaker Server's xml gateway
 
 * server - the server url
 * auth - an object with "user" and "pass" properties
@@ -16,9 +21,10 @@ Make it easy to make request to FileMaker Server's xml gateway. We may add some 
 
 
 ## Usage
+### Raw Request ( original method )
 
 ```javascript
-const client = require('fms-xml-client');
+const request = require('fms-xml-client');
 const options = {    
     server : "<serverURL>",
     auth : {
@@ -33,7 +39,7 @@ const options = {
 }
 
 // make the request
-client(options)
+request(options)
     .then(json=>{
         // do stuff with son
     })
@@ -42,7 +48,36 @@ client(options)
     })
 ```
 
+
 ### Command Object
+
+
+### useing createClient()
+
+```javascript
+const createClient = require('fms-xml-client').createClient;
+const options = {    
+    server : "<serverURL>",
+    auth : {
+        user : "admin"
+        pass : "pass"
+    },
+    command : {
+      '-db' : 'Test',
+      '-findall' : true,
+      '-lay' : 'people'
+    }
+}
+
+const People = createClient(options)
+// query can use all the xml gateway options for finding.
+// finds all the records where the firstName contains 'joe'
+const query = ({firstName : 'joe', "firstName.op" : 'cn' })
+People.find(query).then(resultset=>{
+    //do stuff
+})
+
+```
 
 All off the FileMaker XML Gateway command and parameters are supported in the command object.
 

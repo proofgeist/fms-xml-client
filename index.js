@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 /**
  * Created by toddgeist on 12/11/16.
  */
 
-const r = require('request-promise');
-const fmresultset = require('./src/fmresultset');
-const requestOptions = require('./src/utils').requestOptions
+const r = require("request-promise");
+const fmresultset = require("./src/fmresultset");
+const requestOptions = require("./src/utils").requestOptions;
 
 /**
  *
@@ -17,11 +17,8 @@ const requestOptions = require('./src/utils').requestOptions
  * @param options.command the XML gateway command object
  * @returns {Promise.<T>}
  */
-module.exports = (options) => {
-
-  return r(requestOptions(options))
-    .then(response=>{
-      return fmresultset(response.body)
-    })
-
+module.exports = options => {
+  return r(requestOptions(options)).then(response => {
+    return fmresultset(response.body);
+  });
 };

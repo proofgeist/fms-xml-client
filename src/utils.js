@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  *
@@ -10,34 +10,30 @@
  * @param options.command the command object to pass to the XML gateway
  * @returns {{uri: string, auth: *}}
  */
-const requestOptions = (options)=>{
-
+const requestOptions = options => {
   const request = {
-    uri: options.server + '/fmi/xml/fmresultset.xml',
-    auth : Object.assign({}, options.auth, {sendImmediate : true})
+    uri: options.server + "/fmi/xml/fmresultset.xml",
+    auth: Object.assign({}, options.auth, { sendImmediate: true })
   };
 
-  request.strictSSL=false;
+  request.strictSSL = false;
   request.resolveWithFullResponse = true;
   request.simple = false;
   request.headers = {
-   contentType : 'application/xml'
+    contentType: "application/xml"
   };
 
-  if(options.command['-edit'] || options.command['-new']){
-    request.method = 'POST';
-    request.form = options.command
-  }else{
-    request.method = 'GET';
-    request.qs = options.command
+  if (options.command["-edit"] || options.command["-new"]) {
+    request.method = "POST";
+    request.form = options.command;
+  } else {
+    request.method = "GET";
+    request.qs = options.command;
   }
 
-  return request
-
+  return request;
 };
 
 module.exports = {
-
   requestOptions
-
-}
+};

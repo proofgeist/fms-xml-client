@@ -54,14 +54,17 @@ const extractRelatedSets = record => {
   const arraryOfRelatedData = record.relatedset;
   if (!arraryOfRelatedData) return null;
   return arraryOfRelatedData.map(relatedSet => {
-    const table = parseInt(relatedSet.$.table);
+    const table = relatedSet.$.table;
     const count = parseInt(relatedSet.$.count);
-    const normalizedRelatedSet = relatedSet.record.map(record => {
+    const normalizedRelatedRecords = relatedSet.record.map(record => {
       return extractFieldData(record);
     });
-    normalizedRelatedSet.table = table;
-    normalizedRelatedSet.count = count;
-    return normalizedRelatedSet;
+
+    return {
+      table,
+      count,
+      records: normalizedRelatedRecords
+    };
   });
 };
 

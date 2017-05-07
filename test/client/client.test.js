@@ -1,63 +1,53 @@
-"use strict";
-/**
- * Created by toddgeist on 12/11/16.
- */
-
 const assert = require("assert");
-const client = require("../../index");
+const createClient = require("../../src/client");
+const r = require("../../");
 const auth = {
   user: "admin",
   pass: "admin"
 };
 
-describe("dbnames", function() {
-  it("should return dbnames", function() {
-    const options = {
-      server: process.env.SERVER_URL,
-      auth,
-      command: {
-        "-dbnames": true
-      }
-    };
-    return client(options).then(json => {
-      assert(json.error.code === 0, "error.code = 0");
-      return json;
+const options = {
+  server: process.env.SERVER_URL,
+  auth,
+  command: {
+    "-db": "Test",
+    "-lay": "people"
+  }
+};
+
+const DB = createClient(options);
+describe.skip("client", function() {
+  describe("find", function() {
+    it("should find some records", function() {
+      return DB.find({ name: "Dave" }).then(json => {
+        assert(json.count === 1);
+        return json;
+      });
+    });
+
+    it("should find all", function() {
+      return DB.findall().then(result => {
+        assert(result.count > 3);
+        return result;
+      });
     });
   });
-});
 
-describe("findall", function() {
-  it("should return some records", function() {
-    const options = {
-      server: process.env.SERVER_URL,
-      auth,
-      command: {
-        "-db": "Test",
-        "-findall": true,
-        "-lay": "people"
-      }
-    };
-    return client(options).then(json => {
-      assert(json.error.code === 0, "error.Code = 0");
-      return json;
+  describe("delete", function() {
+    it("should remove the record", function() {
+      const query = { name: "delete me" };
+      return DB.delete(query).then(result => {
+        assert(result.count === 0);
+        return result;
+      });
     });
-  });
-});
 
-describe("bad url", function() {
-  it("should not throw an error", function() {
-    const options = {
-      server: "yuck.com",
-      auth,
-      command: {
-        "-db": "Test",
-        "-findall": true,
-        "-lays": "people"
-      }
-    };
-    return client(options).catch(err => {
-      assert(err.name === "RequestError");
-      return console.log();
+    it("should fail to record", function() {
+      const query = { name: "no me" };
+      return DB.delete(query).catch(e => {
+        assert(e.error === 401);
+        return e;
+      });
     });
   });
 });

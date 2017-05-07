@@ -32,6 +32,40 @@ const normalizeFieldDefs = json => {
 };
 
 /**
+ * builds the record Obj
+ * 
+ * @param {object} record 
+ * @returns {object} recird
+ */
+const extractFieldData = record => {
+  const recObj = {};
+  recObj["-modid"] = record.$["mod-id"];
+  recObj["-recid"] = record.$["record-id"];
+  const arrayOfFieldData = record.field;
+
+  arrayOfFieldData.map(field => {
+    recObj[field.$.name] = field.data[0];
+  });
+
+  return recObj;
+};
+
+const extractRelatedSets = record => {
+  const arraryOfRelatedData = record.relatedset;
+  if (!arraryOfRelatedData) return null;
+  return arraryOfRelatedData.map(relatedSet => {
+    const table = parseInt(relatedSet.$.table);
+    const count = parseInt(relatedSet.$.count);
+    const normalizedRelatedSet = relatedSet.record.map(record => {
+      return extractFieldData(record);
+    });
+    normalizedRelatedSet.table = table;
+    normalizedRelatedSet.count = count;
+    return normalizedRelatedSet;
+  });
+};
+
+/**
  * normalize the records array out of the response
  * @param json
  * @returns {Array|*|{}}
@@ -41,17 +75,11 @@ const normalizeRecords = json => {
 
   if (resultSet.$.count >= 1) {
     return resultSet.record.map(record => {
-      const recObj = {};
-      recObj["-modid"] = record.$["mod-id"];
-      recObj["-recid"] = record.$["record-id"];
-      const arrayOfFieldData = record.field;
-      arrayOfFieldData.map(field => {
-        recObj[field.$.name] = field.data[0];
-      });
+      const recObj = extractFieldData(record);
+      recObj.relatedSets = extractRelatedSets(record);
       return recObj;
     });
   }
-
   return [];
 };
 
@@ -76,6 +104,10 @@ const formatJSON = json => {
     return result;
   }
 
+  result.meta = {
+    found: parseInt(json.fmresultset.resultset[0].$.count),
+    total: parseInt(datasource["total-count"])
+  };
   result.records = normalizeRecords(json);
   result.fields = normalizeFieldDefs(json);
   return result;

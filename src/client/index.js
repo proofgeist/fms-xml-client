@@ -5,8 +5,15 @@ const debug = require("debug")("fms-xml-client");
 const handleResponse = response => {
   debug("Response", response);
   if (response.error.code === 0 || response.error.code === 401) {
+    const count = response.error.code === 401
+      ? 0
+      : parseInt(response.meta.found);
+    const total = response.error.code === 401
+      ? null
+      : parseInt(response.meta.total);
     return {
-      count: response.datasource["total-count"],
+      count,
+      total,
       records: response.records ? response.records : []
     };
   } else {
@@ -15,13 +22,14 @@ const handleResponse = response => {
 };
 
 /**
+ * creates a client with the default options
  * @param options
  * @param options.server  the FileMaker Server URL
  * @param options.auth
  * @param options.auth.user the user name
  * @param options.auth.pass the user password
  * @param options.command the XML gateway command object
- * @returns {Promise.<T>}
+ * @returns {object}
  */
 const createClient = options => {
   const baseOpts = options;
@@ -72,6 +80,19 @@ const createClient = options => {
   };
 
   /**
+   * find all records
+   * 
+   * @param {any} optionalCommands 
+   * @param {any} auth 
+   * @returns 
+   */
+  const findall = (optionalCommands, auth) => {
+    const commands = addCommandParam(optionalCommands, "-findall");
+    const opts = buildOpts(commands, auth);
+    return request(opts).then(handleResponse);
+  };
+
+  /**
  * finds an updates the first record returned by the find
  * creates the record if it isn' there.
  * @param {object} query 
@@ -89,11 +110,11 @@ const createClient = options => {
       });
   };
 
-  const deleteByRecId = (recid, optionalCommand, auth) => {
+  const deleteByRecId = (recid, optionalCommands, auth) => {
     const commands = addCommandParam(optionalCommands, "-delete");
     commands["-recid"] = recid;
     opts = buildOpts({}, commands, auth);
-    return request(opts);
+    return request(opts).then(handleResponse);
   };
 
   /**
@@ -120,6 +141,8 @@ const createClient = options => {
   return {
     save,
     find,
+    findall,
+    findAll: findall,
     upsert,
     delete: remove
   };

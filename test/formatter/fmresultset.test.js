@@ -8,7 +8,7 @@ const assert = require("assert");
 const fmresultset = require("../../src/fms-request/fmresultset");
 const fs = require("fs");
 
-describe("fmresultset converter", function() {
+describe.only("fmresultset converter", function() {
   describe("when given the dbnames query result", function() {
     const xml = fs.readFileSync(
       __dirname + "/../fixtures/fmresultset-dbnames.xml"
@@ -44,6 +44,23 @@ describe("fmresultset converter", function() {
       return convertToJSON.then(json => {
         const result = json.fields.id.autoEnter;
         return assert(result);
+      });
+    });
+  });
+
+  describe("when given xml with relatedSets", function() {
+    const xml = fs.readFileSync(
+      __dirname + "/../fixtures/fmresultset-related.xml"
+    );
+
+    it("should parse them correctly", function() {
+      return fmresultset(xml).then(json => {
+        assert(json.error.code === 0, "errorCode should be 0");
+
+        const count = json.records[0].relatedSets[0].count;
+        assert(count > 0, "count is great than zero");
+
+        return json;
       });
     });
   });

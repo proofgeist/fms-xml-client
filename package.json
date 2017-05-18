@@ -1,6 +1,6 @@
 {
   "name": "fms-xml-client",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "FileMaker Server XML Gateway JS Client",
   "main": "index.js",
   "scripts": {

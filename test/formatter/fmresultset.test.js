@@ -65,6 +65,23 @@ describe.only("fmresultset converter", function() {
     });
   });
 
+  describe("when given xml with empty relatedSets", function() {
+    const xml = fs.readFileSync(
+      __dirname + "/../fixtures/fmresultset-related-empty.xml"
+    );
+
+    it("should give 0 count", function() {
+      return fmresultset(xml).then(json => {
+        assert(json.error.code === 0, "errorCode should be 0");
+
+        const count = json.records[0].relatedSets[0].count;
+        assert(count === 0, "count is 0");
+
+        return json;
+      });
+    });
+  });
+
   describe("when given a 954 error", function() {
     const xml = fs.readFileSync(
       __dirname + "/../fixtures/fmresultset-error954.xml"

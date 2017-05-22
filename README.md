@@ -52,7 +52,7 @@ request(options)
 ### Command Object
 
 
-### useing createClient()
+### using createClient()
 
 ```javascript
 const createClient = require('fms-xml-client').createClient;
@@ -78,6 +78,42 @@ People.find(query).then(resultset=>{
 })
 
 ```
+
+### client API
+
+Each client method can take two optional parameters
+* additionalCommands - xml gateway commands to add to the request. Useful for things like adding sorts, running scripts, max and skip etc.
+* auth - lets you change the auth for just this command
+
+
+#### find 
+find records using a query
+`People.find(query, additionalCommands, auth)`
+
+#### findAll 
+find all the records
+`People.findAll(addtionalCommands, auth)`
+
+
+#### save
+Save a record to the db. it will create it if it doesn't exist. 
+`People.save(data, additionalCommands, auth)`
+
+#### update
+update the first record found with the query
+`People.update(query,  data, additionalCommands, auth)`
+
+#### upset 
+update or the first record found with the query, or insert it if it doesn't exist
+`People.upsert(query, data, additionalCommands, auth)`
+
+#### delete 
+delete the first record found by the query
+`People.delete(query, additionalCommands, auth)`
+
+delete the first record found by the query
+`People.delete(query, additionalCommands, auth)`
+
 
 All off the FileMaker XML Gateway command and parameters are supported in the command object.
 

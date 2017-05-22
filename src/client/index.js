@@ -119,7 +119,7 @@ const createClient = options => {
   };
 
   /**
- * updates the first record 
+ * updates the first record, errors if it doesn't find it
  * @param {object} query 
  * @param {object} newData 
  * @param {object} optionalCommands 

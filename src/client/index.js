@@ -67,6 +67,14 @@ const createClient = options => {
     return request(opts).then(handleResponse);
   };
 
+  const saveExisting = (record, optionalCommands, auth) => {
+    const param = "-new";
+    const commands = addCommandParam(optionalCommands, param);
+    const opts = buildOpts(record, commands, auth);
+    debug("saving with these opts", opts);
+    return request(opts).then(handleResponse);
+  };
+
   /**
  * performs a find using the query Object
  * @param {object} query 
@@ -96,17 +104,39 @@ const createClient = options => {
  * finds an updates the first record returned by the find
  * creates the record if it isn' there.
  * @param {object} query 
- * @param {objet} newData 
+ * @param {object} newData 
  * @param {object} optionalCommands 
  * @param {object} auth 
  */
   const upsert = (query, newData, optionalCommands, auth) => {
+    return find(query, optionalCommands, auth).then(resultSet => {
+      const record = resultSet.records[0] ? resultSet.records[0] : {};
+      if (record["-recid"]) {
+        newData["-recid"] = record["-recid"];
+      }
+      return save(newData, optionalCommands);
+    });
+  };
+
+  /**
+ * updates the first record 
+ * @param {object} query 
+ * @param {object} newData 
+ * @param {object} optionalCommands 
+ * @param {object} auth 
+ */
+  const update = (query, newData, optionalCommands, auth) => {
     return find(query, optionalCommands, auth)
-      .then(handleResponse)
+      .then(resultSet => {
+        if (resultSet.count === 0) {
+          throw new FMSError(401);
+        }
+        return resultSet;
+      })
       .then(resultSet => {
         const record = resultSet.records[0] ? resultSet.records[0] : {};
-        Object.assign(record, newData); //merge
-        return save(record, optionalCommands);
+        newData["-recid"] = record["-recid-id"];
+        return saveExisting(newData, optionalCommands);
       });
   };
 
@@ -143,6 +173,7 @@ const createClient = options => {
     find,
     findall,
     findAll: findall,
+    update,
     upsert,
     delete: remove
   };

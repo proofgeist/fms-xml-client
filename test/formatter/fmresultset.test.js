@@ -8,7 +8,7 @@ const assert = require("assert");
 const fmresultset = require("../../src/fms-request/fmresultset");
 const fs = require("fs");
 
-describe.only("fmresultset converter", function() {
+describe("fmresultset converter", function() {
   describe("when given the dbnames query result", function() {
     const xml = fs.readFileSync(
       __dirname + "/../fixtures/fmresultset-dbnames.xml"

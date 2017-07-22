@@ -1,89 +1,63 @@
 # fms-xml-client
 
 A Promise based FileMaker Server XML gateway client for node.js.
-note! Becuase of CORS issues with FileMaker server this is only useful in node. It will not work in the browser.
+note! Because of CORS issues with FileMaker server this is only useful in node. It will not work in the browser.
 
-### 2.x Verson Breaking Change
-recid and modid are now returned in the same format that get sent it ie `-recid` and `-modid`
+### Version 3 Makes the simple client the default
 
-### 2.1 added expiremental createClient function
-new Function that will create client with some built in methods, like save, upsert, find, delete etc. Pass in the same options as when making the raw request (see below)
-
-`const createClient = require('fms-xml-client').createClient`
-
-## Goals
-
-Make it easy to make request to FileMaker Server's xml gateway
-
-* server - the server url
-* auth - an object with "user" and "pass" properties
-* command - an object that describes the XML Gateway command
-
-
-## Usage
-### Raw Request ( original method )
+if you need the old request object api it is still available as an additional export
 
 ```javascript
-const request = require('fms-xml-client');
-const options = {    
-    server : "<serverURL>",
-    auth : {
-        user : "admin"
-        pass : "pass"
-    },
-    command : {
-      '-db' : 'Test',
-      '-findall' : true,
-      '-lay' : 'people'
-    }
-}
-
-// make the request
-request(options)
-    .then(json=>{
-        // do stuff with son
-    })
-    .catch(err=>{
-        // do stuff with error
-    })
+const request = require('fas-xml-client').request
 ```
 
+## Usage
+### Version 3 and greater.
 
-### Command Object
-
-
-### using createClient()
+Using the provided factory functions you create a Layout Object, for the layout you want to target. The Layout Object has a bunch of usefule methods for find, updates, etc.  See API below for details.
 
 ```javascript
-const createClient = require('fms-xml-client').createClient;
+// get as server factory function
+const fms = require('fms-xml-client');
+
+//config options
 const options = {    
     server : "<serverURL>",
     auth : {
         user : "admin"
         pass : "pass"
-    },
-    command : {
-      '-db' : 'Test',
-      '-findall' : true,
-      '-lay' : 'people'
     }
 }
 
-const People = createClient(options)
+//use it to create a server object
+const server = fms(options);
+
+//get a DB object
+const db = server.db("Test");
+
+//finally get a Layout Object
+const People = db.layout("people")
+
 // query can use all the xml gateway options for finding.
 // finds all the records where the firstName contains 'joe'
+
 const query = ({firstName : 'joe', "firstName.op" : 'cn' })
 People.find(query).then(resultset=>{
     //do stuff
 })
 
+// See API below for each method available to a Layout Object
+
 ```
 
-### client API
 
-Each client method can take two optional parameters
+### Layout Object API
+
+Each method can take two optional parameters
 * additionalCommands - xml gateway commands to add to the request. Useful for things like adding sorts, running scripts, max and skip etc.
 * auth - lets you change the auth for just this command
+
+Everything returns a Promise. If you care what flavor, we use bluebird Promise.
 
 
 #### find 
@@ -119,6 +93,36 @@ All off the FileMaker XML Gateway command and parameters are supported in the co
 
 All of the query commands are documented in the [FileMaker® Server 15
 Custom Web Publishing Guide](https://fmhelp.filemaker.com/docs/15/en/fms15_cwp_guide.pdf) starting on paging 37.
+
+### Using The Raw Request Object
+
+
+
+```javascript
+const request = require('fms-xml-client').request;
+const options = {    
+    server : "<serverURL>",
+    auth : {
+        user : "admin"
+        pass : "pass"
+    },
+    command : {
+      '-db' : 'Test',
+      '-findall' : true,
+      '-lay' : 'people'
+    }
+}
+
+// make the request
+request(options)
+    .then(json=>{
+        // do stuff with son
+    })
+    .catch(err=>{
+        // do stuff with error
+    })
+
+```
 
 ### Running the Test
 

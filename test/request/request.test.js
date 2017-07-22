@@ -4,7 +4,8 @@
  */
 
 const assert = require("assert");
-const client = require("../../index");
+const fms = require("../../");
+const client = fms.request;
 const auth = {
   user: "admin",
   pass: "admin"

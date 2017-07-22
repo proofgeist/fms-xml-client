@@ -96,7 +96,7 @@ const createClient = options => {
    */
   const findall = (optionalCommands, auth) => {
     const commands = addCommandParam(optionalCommands, "-findall");
-    const opts = buildOpts(commands, auth);
+    const opts = buildOpts({}, commands, auth);
     return request(opts).then(handleResponse);
   };
 

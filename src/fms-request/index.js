@@ -18,7 +18,23 @@ const requestOptions = require("./utils").requestOptions;
  * @returns {Promise.<T>}
  */
 module.exports = options => {
-  return r(requestOptions(options)).then(response => {
-    return fmresultset(response.body);
-  });
+  return r(requestOptions(options))
+    .then(response => {
+      if (response.statusCode === 401) {
+        return {
+          error: {
+            code: "212",
+            errorMessage:
+              "Invalid user account and/or password. Please try again"
+          }
+        };
+      }
+      return response;
+    })
+    .then(response => {
+      if (response.error) {
+        return response;
+      }
+      return fmresultset(response.body);
+    });
 };

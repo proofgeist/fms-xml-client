@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/geistinteractive/fms-xml-client.git"
   },
-  "keywords": [
-    "filemaker"
-  ],
+  "keywords": ["filemaker"],
   "author": "Todd Geist <todd@geistinteractive.com> (http://www.geisintertactive.com)",
   "license": "MIT",
   "bugs": {
@@ -28,10 +26,10 @@
     "lodash.clonedeep": "^4.5.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "xml2js": "^0.4.17"
+    "xml2js": "^0.4.17",
+    "dotenv": "^4.0.0"
   },
   "devDependencies": {
-    "dotenv": "^4.0.0",
     "mocha": "^3.2.0"
   }
 }

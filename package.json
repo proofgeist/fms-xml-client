@@ -1,6 +1,6 @@
 {
   "name": "fms-xml-client",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "FileMaker Server XML Gateway JS Client",
   "main": "src/",
   "scripts": {
@@ -14,7 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/geistinteractive/fms-xml-client.git"
   },
-  "keywords": ["filemaker"],
+  "keywords": [
+    "filemaker"
+  ],
   "author": "Todd Geist <todd@geistinteractive.com> (http://www.geisintertactive.com)",
   "license": "MIT",
   "bugs": {

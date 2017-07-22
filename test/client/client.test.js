@@ -23,12 +23,11 @@ describe("client", function() {
         return json;
       });
     });
-    it.only("should get 401", function() {
+    it("should catch a 212 error", function() {
       const auth = { user: "no", pass: "no" };
-      return People.findall({}, { auth }).then(result => {
-        console.log(result);
-        assert(result.count > 3);
-        return result;
+      return People.findall({}, { auth }).catch(e => {
+        assert(e.error === "212");
+        return e;
       });
     });
 

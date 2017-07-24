@@ -1,25 +1,18 @@
 /**
  * Created by toddgeist on 3/31/15.
  */
+
+class FileMakerServerError extends Error {
+  constructor(code) {
+    super(code);
+    this.error = code;
+    this.message = getMessge(code);
+    this.name = "FileMakerServerError";
+    Error.captureStackTrace(this, FileMakerServerError);
+  }
+}
 module.exports = exports = FileMakerServerError;
 module.exports.errorMessage = getMessge;
-
-/**
- * FileMaker Error - based on https://coderwall.com/p/m3-cqw
- * @param code
- * @param msg
- * @constructor
- */
-function FileMakerServerError(code) {
-  this.error = code;
-  this.message = getMessge(code);
-  this.name = "FileMakerServerError";
-  // const err = Error(this.message); // http://es5.github.io/#x15.11.1
-  // this.stack = err.stack;
-}
-
-FileMakerServerError.prototype = Object.create(Error.prototype);
-FileMakerServerError.prototype.constructor = FileMakerServerError;
 
 function getMessge(errorCode) {
   var returnString = "";

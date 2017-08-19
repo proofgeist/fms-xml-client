@@ -4,7 +4,7 @@ A Promise based FileMaker Server XML gateway client for node.js.
 note! Because of CORS issues with FileMaker server this is only useful in node. It will not work in the browser.
 
 ### Fast XML Parser
-Starting with version 3.1.1 we use fast-xml-parser instead of xml2js to parse the XML
+Starting with version 3.1.0 we use fast-xml-parser instead of xml2js to parse the XML
 
 ### Version 3 Makes the simple client the default
 

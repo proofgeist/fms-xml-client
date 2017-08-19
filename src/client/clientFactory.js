@@ -154,6 +154,7 @@ const createClient = options => {
    * @param {object} auth 
    */
   const remove = (query, optionalCommand, auth) => {
+    
     if (query["-recid"]) {
       return deleteByRecId(query["-recid"]);
     } else {

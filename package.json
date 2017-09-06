@@ -25,6 +25,7 @@
   "homepage": "https://github.com/geistinteractive/fms-xml-client#readme",
   "dependencies": {
     "bluebird": "^3.4.0",
+    "debug": "^3.0.1",
     "dotenv": "^4.0.0",
     "fast-xml-parser": "^2.7.3",
     "lodash.clonedeep": "^4.5.0",

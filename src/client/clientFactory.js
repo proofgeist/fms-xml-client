@@ -67,7 +67,7 @@ const createClient = options => {
   };
 
   const saveExisting = (record, optionalCommands, auth) => {
-    const param = "-new";
+    const param = "-edit";
     const commands = addCommandParam(optionalCommands, param);
     const opts = buildOpts(record, commands, auth);
     debug("saving with these opts", opts);
@@ -135,7 +135,7 @@ const createClient = options => {
       })
       .then(resultSet => {
         const record = resultSet.records[0] ? resultSet.records[0] : {};
-        newData["-recid"] = record["-recid-id"];
+        newData["-recid"] = record["-recid"];
         return saveExisting(newData, optionalCommands);
       });
   };
@@ -154,7 +154,6 @@ const createClient = options => {
    * @param {object} auth 
    */
   const remove = (query, optionalCommand, auth) => {
-    
     if (query["-recid"]) {
       return deleteByRecId(query["-recid"]);
     } else {
